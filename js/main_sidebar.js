@@ -13,25 +13,28 @@ $(document).ready(function() {
         // 클릭되었을 경우
         if (!isInputMode) {
             var divText = $(textElement).text()
+            if(divText){
             $('.ax-editable-panel-title').remove();
             var input = $('<input class="modify-input">').val(divText);
             $('#change-input').append(input);
             input.focus();
-            isInputMode = true;
+            isInputMode = true;}
         } else {
             inputText = $('.modify-input').val().trim(); // 전역 변수에 할당
-            $('.modify-input').remove();
-            var newDiv = $('<div id="change-input" class="tw-task-properties-header__title-wrapper">' +
-                '<div class="tw-click-area tw-editable-panel-title ax-editable-panel-title --editable --plain-text --clickable" role="button" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="제목">' +
+            if (inputText) {
+                $('.modify-input').remove();
+                var newDiv = $('<div id="change-input" class="tw-task-properties-header__title-wrapper">' +
+                    '<div class="tw-click-area tw-editable-panel-title ax-editable-panel-title --editable --plain-text --clickable" role="button" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="제목">' +
                     '<i class="tw-icon tw-editable-panel-title__icon ax-editable-panel-title__icon bi bi-pencil" style="line-height:;"></i>' +
                     '<div class="tw-editable-panel-title__text ax-editable-panel-title__text">' + inputText + '</div>' +
                     '<span style="display: none;"></span>' +
-                '</div>' +
-            '</div>');
-            $('#change-input').replaceWith(newDiv);
-
-            $('.task-header__title').eq(selectedTaskIndex).text(inputText)
-            isInputMode = false;
+                    '</div>' +
+                    '</div>');
+                    $('#change-input').replaceWith(newDiv);
+                    
+                    $('.task-header__title').eq(selectedTaskIndex).text(inputText)
+                    isInputMode = false;
+            }
         }
     }
 
@@ -1290,5 +1293,6 @@ $(document).ready(function() {
     // 삭제 누르면 클릭한 task 삭제되는 함수
     
 });
+
 
 
